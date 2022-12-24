@@ -16,16 +16,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  *
  * @author tugoflaherty
  */
-public class GUIController implements ActionListener {
-
-    /**
-     * This method is an override of the actionPerformed method in ActionListener
-     * It determines the option selected in the Button Panel in the user interface and calls the relevant method
-     * It returns no values
-     * @param ae This is an ActionEvent parameter to determine which  methods to run when the user interaction happens
-     */
-    
-    //get openFile GUI functionality to work
+public class GUIController implements ActionListener {    
     @Override
     public void actionPerformed(ActionEvent ae) {
         GUIViewer guiViewer = GUIViewer.getInstance();
@@ -43,7 +34,7 @@ public class GUIController implements ActionListener {
                         File fileToOpen = openFileChooser.getSelectedFile();
                         String openFilePath = fileToOpen.getAbsolutePath();
                         staffListReader.readOldCSVFile(openFilePath);
-                        System.out.println("Config File Path: " + openFilePath);
+                        staffListReader.getStaffChanges();
                     }
                 }
                 break;
@@ -59,7 +50,7 @@ public class GUIController implements ActionListener {
                         File fileToOpen = openFileChooser.getSelectedFile();
                         String openFilePath = fileToOpen.getAbsolutePath();
                         staffListReader.readNewCSVFile(openFilePath);
-                        System.out.println("Config File Path: " + openFilePath);
+                        staffListReader.getStaffChanges();
                     }
                 }
                 break;
@@ -74,7 +65,6 @@ public class GUIController implements ActionListener {
                     fileToSave = saveFileChooser.getSelectedFile();
                     saveFilePath = fileToSave.getAbsolutePath();
                     staffListReader.writeFile(saveFilePath);
-                    System.out.println("Config File Path: " + saveFilePath);
                 }
                 break;
             case "help":

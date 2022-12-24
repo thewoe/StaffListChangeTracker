@@ -96,7 +96,7 @@ public final class StaffListReader {
         StaffListReader.newStaff = newStaff;	  		 	  	 	        	     	
     }
   
-    public static List[] getStaffChanges() {
+    public static void getStaffChanges() {
         List<Staff> staffLeft = new ArrayList();
         List<Staff> staffArrived = new ArrayList();
         for(Staff oldStaffMember: oldStaff){
@@ -120,7 +120,25 @@ public final class StaffListReader {
         }
         List<Staff> distinctStaffLeft = new ArrayList(new HashSet(staffLeft));
         List<Staff> distinctStaffArrived = new ArrayList(new HashSet(staffArrived));
-        return new List[] {distinctStaffLeft, distinctStaffArrived};
+        String staffLeftString = "Staff Members Who Have Left:" + System.getProperty("line.separator");
+        String staffArrivedString = "Staff Members Who Have Arrived:" + System.getProperty("line.separator");
+        for (Staff staffMemberLeft : distinctStaffLeft) {
+            staffLeftString += staffMemberLeft.toString() + System.getProperty("line.separator");
+            System.out.println("Staff Member Left     |  "+staffMemberLeft.toString());
+        }
+        if (staffLeft.isEmpty()) {
+            staffLeftString += "No staff have left." + System.getProperty("line.separator");
+            System.out.println("No staff have left.");
+        }
+        for (Staff staffMemberArrived : distinctStaffArrived) {
+            staffArrivedString += staffMemberArrived.toString() + System.getProperty("line.separator");
+            System.out.println("Staff Member Arrived  |  "+staffMemberArrived.toString());
+        }
+        if (staffArrived.isEmpty()) {
+            staffArrivedString += "No staff have arrived." + System.getProperty("line.separator");
+            System.out.println("No staff have arrived.");
+        }
+        GUIViewer.getInstance().getStaffChangeDisplay().setText(staffLeftString + staffArrivedString);
     }
     
     public void writeFile(String filePath) {	  		 	  	 	        	     	
